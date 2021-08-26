@@ -68,8 +68,11 @@ impl Engine {
         Ok(Engine {})
     }
 
-    fn connect(&self) -> PyResult<i32> {
-        Ok(10)
+    fn connect<'py>(&self, py: Python<'py>) -> PyResult<&'py PyAny> {
+        pyo3_asyncio::tokio::future_into_py(py, async {
+			tokio::time::sleep(std::time::Duration::from_secs(1)).await;
+			Ok(Python::with_gil(|py| py.None()))
+		})
     }
 }
 
