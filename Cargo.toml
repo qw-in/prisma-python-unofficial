@@ -1,0 +1,21 @@
+[package]
+name = "query-engine-python-api"
+edition = "2018"
+version = "0.1.0"
+
+[lib]
+name = "query_engine"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.14", features = ["extension-module"] }
+pyo3-asyncio = { version = "0.14", features = ["tokio-runtime"] }
+tokio = "1.9"
+
+bson = { version = "=2.0.0-beta.1" }
+mongodb = { version = "=2.0.0-beta.1", features = ["bson-chrono-0_4", "bson-uuid-0_8"] }
+
+query-core = { git = "https://github.com/prisma/prisma-engines", rev = "b3db380" }
+request-handlers = { git = "https://github.com/prisma/prisma-engines", rev = "b3db380" }
+datamodel = { git = "https://github.com/prisma/prisma-engines", rev = "b3db380" }
+prisma-models = { git = "https://github.com/prisma/prisma-engines", rev = "b3db380" }
